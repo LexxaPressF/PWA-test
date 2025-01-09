@@ -37,6 +37,7 @@
     "vite": "^6.0.5",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-vue-devtools": "^7.6.8",
-    "vue-tsc": "^2.1.10"
+    "vue-tsc": "^2.1.10",
+    "workbox-precaching": "^7.3.0"
   }
 }
