@@ -11,6 +11,7 @@ export default defineConfig({
         vue(),
         vueDevTools(),
         VitePWA({
+            strategies: 'injectManifest',
             registerType: 'autoUpdate',
             manifest: false,
             srcDir: 'src',

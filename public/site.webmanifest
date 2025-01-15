@@ -31,5 +31,14 @@
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#FFFFFF",
-  "description": "Application for discovering PWA capabilities"
+  "description": "Application for discovering PWA capabilities",
+  "screenshots": [
+     {
+       "src": "/img.png",
+       "sizes": "640x442",
+       "type": "image/gif",
+       "form_factor": "wide",
+       "label": "Application"
+     }
+   ]
 }
