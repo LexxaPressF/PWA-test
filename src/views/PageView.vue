@@ -24,12 +24,13 @@ const pushHome = () => {
 <style scoped lang="scss">
 header {
     height: 10%;
-    max-height: 86px;
-    min-height: 60px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #00bd7e;
+}
+main {
+    height: 80%;
 }
 </style>

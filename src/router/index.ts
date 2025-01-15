@@ -18,6 +18,16 @@ const router = createRouter({
                     name: 'nested',
                     component: () => import('@/views/NestedView.vue'),
                 },
+                {
+                    path: '/list',
+                    name: 'list',
+                    component: () => import('@/views/ListView.vue'),
+                },
+                {
+                    path: '/graphic',
+                    name: 'graphic',
+                    component: () => import('@/views/GraphicView.vue'),
+                },
             ],
         },
     ],
