@@ -39,8 +39,8 @@ const cards: Card[] = [
     {
         id: 3,
         title: 'Возможности смартфона',
-        description: 'This is card 4.',
-        page: 'nested',
+        description: 'Проверка использования возможностей смартфона в PWA',
+        page: 'phone',
     },
     {id: 4, title: 'Card 5', description: 'This is card 5.', page: 'nested'},
     {id: 5, title: 'Card 6', description: 'This is card 6.', page: 'nested'},
