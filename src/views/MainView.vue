@@ -42,8 +42,6 @@ const cards: Card[] = [
         description: 'Проверка использования возможностей смартфона в PWA',
         page: 'phone',
     },
-    {id: 4, title: 'Card 5', description: 'This is card 5.', page: 'nested'},
-    {id: 5, title: 'Card 6', description: 'This is card 6.', page: 'nested'},
 ];
 </script>
 

@@ -5,8 +5,8 @@
             @click="generateList"
         />
         <UiBtn
-            text="Отсортировать список по id"
-            @click="list.sort((a, b) => a.id - b.id)"
+            text="Отсортировать список по random"
+            @click="list.sort((a, b) => a.randomNumber - b.randomNumber)"
         />
     </div>
     <div class="list">
@@ -28,9 +28,10 @@ import {generateUid} from '@/helpers/UidHelper.ts';
 const list = ref<IListElement[]>([]);
 
 const generateList = () => {
-    list.value = Array.from({length: 1000}, () => {
+    list.value = Array.from({length: 1000}, (_, index) => {
         return {
-            id: Math.floor(Math.random() * 1000),
+            id: index,
+            randomNumber: Math.floor(Math.random() * 1000),
             uid: generateUid(),
         };
     });

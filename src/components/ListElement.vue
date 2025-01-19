@@ -1,6 +1,6 @@
 <template>
     <div class="element">
-        <h3>Id: {{ element.id }}</h3>
+        <h3>Random: {{ element.randomNumber }}</h3>
         <p>Uid: {{ element.uid }}</p>
         <button>Удалить</button>
     </div>

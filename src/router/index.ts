@@ -28,6 +28,11 @@ const router = createRouter({
                     name: 'graphic',
                     component: () => import('@/views/GraphicView.vue'),
                 },
+                {
+                    path: '/phone',
+                    name: 'phone',
+                    component: () => import('@/views/PhoneCapabilities.vue'),
+                },
             ],
         },
     ],
