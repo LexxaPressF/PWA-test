@@ -63,7 +63,6 @@ const changeStatus = (direction: 'up' | 'down') => {
         nestedItem.value.status = !nestedItem.value.status;
         let child = nestedItem.value.child;
         while (typeof child !== 'undefined') {
-            console.log(child);
             child.status = !child.status;
             child = child.child;
         }
