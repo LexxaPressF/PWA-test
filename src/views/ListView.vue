@@ -27,12 +27,12 @@ import type {IListElement} from '@/models/ListModels.ts';
 import {generateUid} from '@/helpers/UidHelper.ts';
 import usePerformanceMark, {
     addPerformanceMark,
+    measurePerformance,
 } from '@/helpers/PerfomanceHelper.ts';
 
 const list = ref<IListElement[]>([]);
 
-const generateList = () => {
-    const t0 = performance.now();
+const generateList = measurePerformance('list', 'generateList', () => {
     list.value = Array.from({length: 1000}, (_, index) => {
         return {
             id: index,
@@ -40,23 +40,25 @@ const generateList = () => {
             uid: generateUid(),
         };
     });
-    const t1 = performance.now();
-    addPerformanceMark('list', 'generateList', t0, t1);
-};
+});
 
-const deleteElement = (id: number) => {
-    const t0 = performance.now();
-    list.value = list.value.filter((item) => item.id !== id);
-    const t1 = performance.now();
-    addPerformanceMark('list', 'delete element from list', t0, t1);
-};
+const deleteElement = measurePerformance(
+    'list',
+    'generateList',
+    (id: number) => {
+        const t0 = performance.now();
+        list.value = list.value.filter((item) => item.id !== id);
+        const t1 = performance.now();
+        addPerformanceMark('list', 'delete element from list', t0, t1);
+    }
+);
 
-const sortList = () => {
+const sortList = measurePerformance('list', 'generateList', () => {
     const t0 = performance.now();
     list.value.sort((a, b) => a.randomNumber - b.randomNumber);
     const t1 = performance.now();
     addPerformanceMark('list', 'sort list', t0, t1);
-};
+});
 
 usePerformanceMark();
 </script>

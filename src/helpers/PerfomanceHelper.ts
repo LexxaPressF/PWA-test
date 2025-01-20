@@ -62,3 +62,16 @@ export default function usePerformanceMark() {
         addPerformanceMark(route, 'onBeforeUpdate -> onUpdated', t3, t4);
     });
 }
+export function measurePerformance<T>(
+    group: string,
+    name: string,
+    fn: (...args: any[]) => T
+): (...args: any[]) => T {
+    return (...args: any[]) => {
+        const t0 = performance.now();
+        const result = fn(...args);
+        const t1 = performance.now();
+        addPerformanceMark(group, name, t0, t1);
+        return result;
+    };
+}
