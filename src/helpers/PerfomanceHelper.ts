@@ -32,10 +32,7 @@ const setToLS = (key: string, value: any) => {
 };
 
 import {onBeforeMount, onMounted, onBeforeUpdate, onUpdated} from 'vue';
-import {useRoute} from 'vue-router';
-
-export default function usePerformanceMark() {
-    const route = useRoute().path.slice(1);
+export default function usePerformanceMark(componentName: string) {
     const t0 = performance.now();
     let t1: number, t2: number, t3: number, t4: number;
 
@@ -45,8 +42,8 @@ export default function usePerformanceMark() {
 
     onMounted(() => {
         t2 = performance.now();
-        addPerformanceMark(route, 'onCreated -> onBeforeMount', t0, t1);
-        addPerformanceMark(route, 'onBeforeMount -> onMounted', t1, t2);
+        addPerformanceMark(componentName, 'onCreated -> onBeforeMount', t0, t1);
+        addPerformanceMark(componentName, 'onBeforeMount -> onMounted', t1, t2);
 
         console.log('Created -> onBeforeMount: ', t1 - t0);
         console.log('onBeforeMount -> onMounted: ', t2 - t1);
@@ -59,7 +56,12 @@ export default function usePerformanceMark() {
     onUpdated(() => {
         t4 = performance.now();
         console.log('onBeforeUpdate -> onUpdated: ', t4 - t3);
-        addPerformanceMark(route, 'onBeforeUpdate -> onUpdated', t3, t4);
+        addPerformanceMark(
+            componentName,
+            'onBeforeUpdate -> onUpdated',
+            t3,
+            t4
+        );
     });
 }
 export function measurePerformance<T>(

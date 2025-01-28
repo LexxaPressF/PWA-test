@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import {ref} from 'vue';
+import usePerformanceMark from '@/helpers/PerfomanceHelper.ts';
 
 // Состояние для хранения текущего местоположения
 const location = ref<{
@@ -63,6 +64,7 @@ const getLocation = () => {
         }
     );
 };
+usePerformanceMark('PhoneGeo');
 </script>
 
 <style scoped>

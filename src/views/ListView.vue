@@ -2,7 +2,7 @@
     <div class="controls">
         <UiBtn
             text="Cгенерировать список"
-            @click="generateList"
+            @click="generateList()"
         />
         <UiBtn
             text="Отсортировать список по random"
@@ -44,23 +44,17 @@ const generateList = measurePerformance('list', 'generateList', () => {
 
 const deleteElement = measurePerformance(
     'list',
-    'generateList',
+    'delete element',
     (id: number) => {
-        const t0 = performance.now();
         list.value = list.value.filter((item) => item.id !== id);
-        const t1 = performance.now();
-        addPerformanceMark('list', 'delete element from list', t0, t1);
     }
 );
 
-const sortList = measurePerformance('list', 'generateList', () => {
-    const t0 = performance.now();
+const sortList = measurePerformance('list', 'sort list', () => {
     list.value.sort((a, b) => a.randomNumber - b.randomNumber);
-    const t1 = performance.now();
-    addPerformanceMark('list', 'sort list', t0, t1);
 });
 
-usePerformanceMark();
+usePerformanceMark('ListView');
 </script>
 
 <style scoped lang="scss">

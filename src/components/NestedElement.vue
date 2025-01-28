@@ -47,6 +47,7 @@
 <script lang="ts" setup>
 import UiBtn from '@/components/common/UiBtn.vue';
 import type {NestedItem} from '@/models/NestedModels.ts';
+import usePerformanceMark from '@/helpers/PerfomanceHelper.ts';
 
 const emit = defineEmits<{
     (e: 'change-status'): void;
@@ -76,6 +77,8 @@ const deleteItem = (item: NestedItem | undefined) => {
         nestedItem.value.child = item;
     }
 };
+
+usePerformanceMark(`NestedElement-${nestedItem.value.id}`);
 </script>
 
 <style scoped lang="scss">

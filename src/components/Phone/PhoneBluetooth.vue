@@ -37,6 +37,7 @@
 <script setup lang="ts">
 /// <reference types="web-bluetooth" />
 import {ref} from 'vue';
+import usePerformanceMark from '@/helpers/PerfomanceHelper.ts';
 
 // Храним имя устройства, выбранное пользователем
 const deviceName = ref<string>('');
@@ -103,6 +104,8 @@ function disconnectDevice() {
         console.log('Устройство отключено');
     }
 }
+
+usePerformanceMark('PhoneBluetooth');
 </script>
 
 <style scoped>

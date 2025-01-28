@@ -67,6 +67,7 @@ import UiBtn from '@/components/common/UiBtn.vue';
 
 // Типы GeoJSON
 import type {Feature, Geometry} from 'geojson';
+import usePerformanceMark from '@/helpers/PerfomanceHelper.ts';
 
 // Ссылки на элементы
 const containerRef = ref<HTMLDivElement | null>(null);
@@ -315,6 +316,8 @@ onBeforeUnmount(() => {
     window.removeEventListener('pointermove', onPointerMove);
     window.removeEventListener('pointerup', onPointerUp);
 });
+
+usePerformanceMark('EarthGraphic');
 </script>
 
 <style scoped lang="scss">

@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import {ref, onMounted, onUnmounted} from 'vue';
+import usePerformanceMark from '@/helpers/PerfomanceHelper.ts';
 
 // Интерфейсы для удобства типизации
 interface Acceleration {
@@ -175,6 +176,8 @@ onUnmounted(() => {
     window.removeEventListener('deviceorientation', handleOrientation);
     window.removeEventListener('devicemotion', handleMotion);
 });
+
+usePerformanceMark('PhoneOrientation');
 </script>
 
 <style scoped>

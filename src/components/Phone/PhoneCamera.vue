@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import {ref} from 'vue';
+import usePerformanceMark from '@/helpers/PerfomanceHelper.ts';
 
 const video = ref<HTMLVideoElement | null>(null);
 navigator.mediaDevices
@@ -24,6 +25,8 @@ navigator.mediaDevices
     .catch((error) => {
         console.error(error);
     });
+
+usePerformanceMark('PhoneCamera');
 </script>
 
 <style scoped lang="scss"></style>
