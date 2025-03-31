@@ -23,26 +23,4 @@ export default defineConfig({
             '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
     },
-    test: {
-        typecheck: true,
-        environment: 'happy-dom',
-        browser: {
-            enabled: true,
-            name: 'firefox',
-            headless: true,
-            provider: 'playwright',
-        },
-        coverage: {
-            enabled: true,
-            reporter: ['html'],
-            provider: 'istanbul',
-        },
-        exclude: [
-            '**/node_modules/**',
-            '**/dist/**',
-            '**/cypress/**',
-            '**/.{idea,git,cache,output,temp}/**',
-            '**/{vite,vitest,jest,build}.config.*',
-        ],
-    },
 });

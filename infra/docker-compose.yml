@@ -50,5 +50,19 @@ services:
     networks:
       - monitoring-net
 
+  e2e:
+    image: cypress/included:12.3.0
+    container_name: e2e
+    depends_on:
+      - pwa
+    environment:
+      - CYPRESS_baseUrl=https://pwa:443
+    working_dir: /e2e
+    volumes:
+      - ../:/e2e
+    command: ["cypress", "run", "--browser", "firefox"]# команда запуска тестов
+    networks:
+      - monitoring-net
+
 networks:
   monitoring-net:

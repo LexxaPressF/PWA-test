@@ -4,6 +4,7 @@
         <p>Uid: {{ element.uid }}</p>
         <UiBtn
             text="Удалить"
+            :class="`delete-${element.id}`"
             @click="emit('delete', element.id)"
         />
     </div>

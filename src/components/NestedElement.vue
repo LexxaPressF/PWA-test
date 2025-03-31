@@ -22,14 +22,17 @@
                 name="status"
             />
             <UiBtn
+                :class="`delete-${nestedItem.id}`"
                 text="Удалить"
                 @click="emit('delete-item', nestedItem.child ?? undefined)"
             />
             <UiBtn
+                :class="`status-down-${nestedItem.id}`"
                 text="Изменить статус вниз"
                 @click="changeStatus('down')"
             />
             <UiBtn
+                :class="`status-up-${nestedItem.id}`"
                 text="Изменить статус вверх"
                 @click="changeStatus('up')"
             />

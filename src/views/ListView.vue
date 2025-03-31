@@ -1,7 +1,7 @@
 <template>
     <div class="controls">
         <UiBtn
-            text="Cгенерировать список"
+            text="Сгенерировать список"
             @click="generateList()"
         />
         <UiBtn
@@ -24,11 +24,10 @@ import UiBtn from '@/components/common/UiBtn.vue';
 import ListElement from '@/components/ListElement.vue';
 import {ref} from 'vue';
 import type {IListElement} from '@/models/ListModels.ts';
-import {generateUid} from '@/helpers/UidHelper.ts';
 import usePerformanceMark, {
-    addPerformanceMark,
     measurePerformance,
 } from '@/helpers/PerfomanceHelper.ts';
+import {generateUid} from '@/helpers/UidHelper.ts';
 
 const list = ref<IListElement[]>([]);
 

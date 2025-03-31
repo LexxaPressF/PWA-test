@@ -1,0 +1,15 @@
+# Используем официальный образ Playwright, включающий все браузеры
+FROM mcr.microsoft.com/playwright:focal
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем файлы зависимостей и устанавливаем npm-пакеты
+COPY package*.json ./
+RUN npm ci
+
+# Копируем исходный код проекта
+COPY . .
+
+# Команда запуска: ждем доступности сервиса приложения по адресу http://app:3000 и затем запускаем тесты
+CMD ["npx", "start-server-and-test", "http://pwa:443", "playwright", "test"]
