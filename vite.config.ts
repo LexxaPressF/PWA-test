@@ -17,6 +17,17 @@ export default defineConfig({
             manifest: false,
             srcDir: 'src',
             filename: 'sw.ts',
+            includeAssets: [
+                'favicon.ico',
+                'favicon.svg',
+                'apple-touch-icon.png',
+                'img.png',
+                'pwa-192x192.png',
+                'pwa-512x512.png',
+                'pwa-maskable-192x192.png',
+                'pwa-maskable-512x512.png',
+                'PWA_logo.svg',
+            ],
         }),
     ],
     resolve: {
