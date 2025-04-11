@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "name": "PWA unleashed",
   "short_name": "test PWA",
   "icons": [
@@ -33,12 +34,18 @@
   "theme_color": "#FFFFFF",
   "description": "Application for discovering PWA capabilities",
   "screenshots": [
-     {
-       "src": "/img.png",
-       "sizes": "640x442",
-       "type": "image/gif",
-       "form_factor": "wide",
-       "label": "Application"
-     }
-   ]
+    {
+      "src": "/img.png",
+      "sizes": "640x442",
+      "type": "image/gif",
+      "label": "Application"
+    },
+    {
+      "src": "/img.png",
+      "sizes": "640x442",
+      "type": "image/gif",
+      "form_factor": "wide",
+      "label": "Application"
+    }
+  ]
 }
