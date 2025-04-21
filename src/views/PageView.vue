@@ -1,11 +1,13 @@
 <template>
     <header>
-        <UiBtn
-            text="На главную"
-            @click="pushHome()"
-        />
-
-        page
+        <div></div>
+        <div>
+            <UiBtn
+                text="На главную"
+                @click="pushHome()"
+            />
+        </div>
+        <div>FPS: {{ fps }}</div>
     </header>
     <main>
         <RouterView />
@@ -14,8 +16,10 @@
 
 <script setup lang="ts">
 import UiBtn from '@/components/common/UiBtn.vue';
+import {useFps} from '@vueuse/core';
 import router from '@/router';
 
+const fps = useFps();
 const pushHome = () => {
     setTimeout(() => router.push({name: 'home'}), 500);
 };
