@@ -2,9 +2,12 @@
 
 context('List Components', () => {
     it('Generate List and sort', () => {
-        cy.visit('https://127.0.0.1');
+        cy.visit('/');
+        cy.screenshot();
 
         cy.contains('Большой список').click();
+        cy.screenshot();
+
         cy.url().should('include', 'list');
 
         for (let i = 0; i <= 100; i++) {
@@ -16,7 +19,7 @@ context('List Components', () => {
     });
 
     it('Deleting', () => {
-        cy.visit('https://127.0.0.1');
+        cy.visit('/');
         cy.contains('Большой список').click();
         cy.url().should('include', 'list');
 
@@ -30,7 +33,7 @@ context('List Components', () => {
                 while (randomSet.has(num)) {
                     num = Math.floor(Math.random() * 1000);
                 }
-                cy.get(`.delete-${Math.floor(Math.random() * 1000)}`).click();
+                cy.get(`.delete-${num}`).click();
                 randomSet.add(num);
             }
             cy.contains('Сгенерировать список').click();

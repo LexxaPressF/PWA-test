@@ -11,5 +11,5 @@ RUN npm ci
 # Копируем исходный код проекта
 COPY . .
 
-# Команда запуска: ждем доступности сервиса приложения по адресу http://app:3000 и затем запускаем тесты
-CMD ["npx", "start-server-and-test", "http://pwa:443", "playwright", "test"]
+# Команда запуска: ждем доступности сервиса приложения по адресу https://pwa:443 и затем запускаем тесты
+CMD ["npx", "start-server-and-test", "https://pwa:443", "playwright", "test"]

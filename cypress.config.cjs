@@ -2,12 +2,13 @@ const {defineConfig} =  require('cypress');
 
 module.exports = defineConfig({
     e2e: {
-        // Поскольку ваше приложение раздаётся через HTTPS, возможно, вам потребуется указать https://localhost
-        baseUrl: 'https://127.0.0.1',
+        base_url: process.env.CYPRESS_BASE_URL,
         // Если возникают проблемы с самоподписанным сертификатом, можно отключить проверки безопасности:
         chromeWebSecurity: false,
+        supportFile: false,
+        video: true,
+        pageLoadTimeout: 120000,
         setupNodeEvents(on, config) {
-            // Дополнительные настройки или обработка событий
             return config;
         },
     },

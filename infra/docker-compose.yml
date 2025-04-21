@@ -59,11 +59,11 @@ services:
     depends_on:
       - pwa
     environment:
-      - CYPRESS_baseUrl=https://pwa:443
+      - CYPRESS_BASE_URL=https://pwa:443
     working_dir: /e2e
     volumes:
       - ../:/e2e
-    command: ["cypress", "run", "--browser", "firefox"]# команда запуска тестов
+    command: ["cypress", "run", "--browser", "chrome"]# команда запуска тестов
     networks:
       - monitoring-net
 
