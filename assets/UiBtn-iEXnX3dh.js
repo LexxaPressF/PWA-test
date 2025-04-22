@@ -1,0 +1,1 @@
+import{d as e,c as o,t as n,o as s,_ as a}from"./index-BgZvhltC.js";const c=e({__name:"UiBtn",props:{text:{}},setup(p){return(t,r)=>(s(),o("button",null,n(t.text),1))}}),i=a(c,[["__scopeId","data-v-143165c6"]]);export{i as U};
