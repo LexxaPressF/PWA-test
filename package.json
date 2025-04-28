@@ -10,6 +10,8 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview --host",
     "build-only": "vite build",
+    "build:pwa": "vite build",
+    "build:classic": "vite build --mode classic",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
