@@ -6,7 +6,6 @@ module.exports = defineConfig({
         // Если возникают проблемы с самоподписанным сертификатом, можно отключить проверки безопасности:
         chromeWebSecurity: false,
         supportFile: false,
-        video: true,
         pageLoadTimeout: 120000,
         setupNodeEvents(on, config) {
             return config;
