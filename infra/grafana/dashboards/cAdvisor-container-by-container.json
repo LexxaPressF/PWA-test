@@ -19,13 +19,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 2,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -301,7 +301,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Использование мощности процессора (в процентах)",
       "fieldConfig": {
@@ -489,7 +489,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Использование оперативной памяти (в мегабайтах)",
       "fieldConfig": {
@@ -661,7 +661,7 @@
             "value": "/docker/2b4d3daaa20347cf57259116bdea4900d76935dfd67ed8d83730782a3a659fb3"
           }
         ],
-        "query": "/docker/2b4d3daaa20347cf57259116bdea4900d76935dfd67ed8d83730782a3a659fb3",
+        "query": "/docker/e90154f3b3e50a77a3c766f6db0ec7f88611b38bfe077a04581ee5aaa89027d5",
         "type": "textbox"
       },
       {
@@ -679,7 +679,7 @@
             "value": "/docker/ad0ec1504f331471c73bb8e004b11e560b0ed793e99076c2d2dbe65de37c4e53"
           }
         ],
-        "query": "/docker/ad0ec1504f331471c73bb8e004b11e560b0ed793e99076c2d2dbe65de37c4e53",
+        "query": "/docker/2d98a2bbf2085d13fd85057fc09d66f16bb8e921789922406bde9580ad33a34c",
         "type": "textbox"
       }
     ]
@@ -692,6 +692,6 @@
   "timezone": "browser",
   "title": "Two containers comparison",
   "uid": "comparison9ng812jkgfi",
-  "version": 12,
+  "version": 1,
   "weekStart": ""
 }
