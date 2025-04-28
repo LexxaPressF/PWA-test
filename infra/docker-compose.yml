@@ -4,17 +4,27 @@ services:
   pwa:
     build:
       context: ../
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.pwa
     container_name: pwa
     ports:
       - "443:443"
     networks:
       - monitoring-net
 
+  classic:
+    build:
+      context: ../
+      dockerfile: Dockerfile.web
+    container_name: classic-web
+    ports:
+      - "8080:80"
+    networks:
+      - monitoring-net
+
   cadvisor:
     image: google/cadvisor:latest
     ports:
-      - "8080:8080"
+      - "5432:8080"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -53,9 +63,9 @@ services:
     networks:
       - monitoring-net
 
-  e2e:
+  e2e-pwa:
     image: cypress/included:12.3.0
-    container_name: e2e
+    container_name: e2e-pwa
     depends_on:
       - pwa
     environment:
@@ -64,6 +74,20 @@ services:
     volumes:
       - ../:/e2e
     command: ["cypress", "run", "--browser", "chrome"]# команда запуска тестов
+    networks:
+      - monitoring-net
+
+  e2e-classic:
+    image: cypress/included:12.3.0
+    container_name: e2e-classic
+    depends_on:
+      - classic
+    environment:
+      - CYPRESS_BASE_URL=http://classic-web
+    working_dir: /e2e
+    volumes:
+      - ../:/e2e
+    command: [ "cypress", "run", "--browser", "chrome" ]# команда запуска тестов
     networks:
       - monitoring-net
 
