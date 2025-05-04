@@ -19,13 +19,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "fieldConfig": {
         "defaults": {
@@ -36,7 +36,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "Мегабайты",
+            "axisLabel": "Килобайты",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
@@ -108,8 +108,8 @@
       "pluginVersion": "11.5.2",
       "targets": [
         {
-          "editorMode": "builder",
-          "expr": "label_replace(\r\n  sum(\r\n    rate(container_network_receive_bytes_total{id=~\"$container\"}[1m])\r\n    +\r\n    rate(container_network_transmit_bytes_total{id=~\"$container\"}[1m])\r\n  ),\r\n  \"legend\", \"Network Total\", \"\", \"\"\r\n)",
+          "editorMode": "code",
+          "expr": "label_replace(\r\n  sum(\r\n    rate(container_network_receive_bytes_total{name=\"$container\", interface=~\"eth0|eth2\"}[30s])\r\n    +\r\n    rate(container_network_transmit_bytes_total{name=\"$container\", interface=~\"eth0|eth2\"}[30s])\r\n  ) / 1024,\r\n  \"legend\", \"Сетевой траффик (всего)\", \"\", \"\"\r\n)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -121,8 +121,8 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "label_replace(sum(rate(container_network_receive_bytes_total{id=~\"$container\"}[1m])), \"legend\", \"Network Receive\", \"\", \"(.*)\")",
+          "editorMode": "code",
+          "expr": "label_replace(sum(rate(container_network_receive_bytes_total{name=\"$container\",interface=~\"eth0|eth2\"}[30s])) / 1024, \"legend\", \"Сетевой трафик (прием)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -138,8 +138,8 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "label_replace(sum(rate(container_network_transmit_bytes_total{id=~\"$container\"}[1m])), \"legend\", \"Network Transmit\", \"\", \"(.*)\")",
+          "editorMode": "code",
+          "expr": "label_replace(sum(rate(container_network_transmit_bytes_total{name=\"$container\",interface=~\"eth0|eth2\"}[30s])) / 1024, \"legend\", \"Сетевой трафик (передача)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -156,7 +156,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Использование CPU по ядрам",
       "fieldConfig": {
@@ -238,7 +238,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (cpu) (rate(container_cpu_usage_seconds_total{id=~\"$container\"}[1m]))",
+          "expr": "sum by (cpu) (rate(container_cpu_usage_seconds_total{name=\"$container\"}[1m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -250,7 +250,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Использование мощности процессора (в процентах)",
       "fieldConfig": {
@@ -336,7 +336,7 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "editorMode": "code",
-          "expr": "sum(rate(container_cpu_usage_seconds_total{id=~\"$container\"}[1m]))",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{name=\"$container\"}[1m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "CPU"
@@ -348,7 +348,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "fegb9dfxb65fkb"
+        "uid": "PBFA97CFB590B2093"
       },
       "description": "Использование оперативной памяти (в мегабайтах)",
       "fieldConfig": {
@@ -447,7 +447,7 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(container_memory_usage_bytes{id=~\"$container\"}) / (1024 * 1024)",
+          "expr": "sum(container_memory_usage_bytes{name=\"$container\"}) / (1024 * 1024)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "RAM (Mb)"
@@ -465,21 +465,22 @@
     "list": [
       {
         "current": {
-          "text": "/docker/bcc83005087f8482a331f6597e6aebb2c3d237f7243f51a75217cef1bc8050eb",
-          "value": "/docker/bcc83005087f8482a331f6597e6aebb2c3d237f7243f51a75217cef1bc8050eb"
+          "text": "browser",
+          "value": "browser"
         },
-        "description": "Id исследуемого контейнера",
-        "label": "Container Id",
+        "definition": "label_values(name)",
+        "description": "Название исследуемого контейнера",
+        "label": "Название контейнера",
         "name": "container",
-        "options": [
-          {
-            "selected": true,
-            "text": "/docker/bcc83005087f8482a331f6597e6aebb2c3d237f7243f51a75217cef1bc8050eb",
-            "value": "/docker/bcc83005087f8482a331f6597e6aebb2c3d237f7243f51a75217cef1bc8050eb"
-          }
-        ],
-        "query": "/docker/bcc83005087f8482a331f6597e6aebb2c3d237f7243f51a75217cef1bc8050eb",
-        "type": "textbox"
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
@@ -491,6 +492,6 @@
   "timezone": "browser",
   "title": "cAdvisor by container",
   "uid": "cadvisor9ng812jkgfi",
-  "version": 4,
+  "version": 3,
   "weekStart": ""
 }

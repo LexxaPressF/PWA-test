@@ -36,7 +36,7 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "Мегабайты",
+            "axisLabel": "Килобайты",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "barWidthFactor": 0.6,
@@ -170,6 +170,96 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Сетевой трафик (e2e-pwa)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Прием (e2e-pwa)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Передача (e2e-pwa)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Сетевой траффик (e2e-classic)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Прием (e2e-classic)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Передача (e2e-classic)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -201,7 +291,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "label_replace(\r\n  sum(\r\n    rate(container_network_receive_bytes_total{id=~\"$container\"}[1m])\r\n    +\r\n    rate(container_network_transmit_bytes_total{id=~\"$container\"}[1m])\r\n  ),\r\n  \"legend\", \"Network Total 1\", \"\", \"\"\r\n)",
+          "expr": "label_replace(\r\n  sum(\r\n    rate(container_network_receive_bytes_total{name=\"$container_1\", interface=~\"eth0|eth2\"}[30s])\r\n    +\r\n    rate(container_network_transmit_bytes_total{name=~\"$container_1\", interface=~\"eth0|eth2\"}[30s])\r\n  ) / 1024,\r\n  \"legend\", \"Сетевой трафик ($container_1)\", \"\", \"\"\r\n)",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -216,8 +306,8 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "label_replace(sum(rate(container_network_receive_bytes_total{id=~\"$container\"}[1m])), \"legend\", \"Network Receive 1\", \"\", \"(.*)\")",
+          "editorMode": "code",
+          "expr": "label_replace(sum(rate(container_network_receive_bytes_total{name=\"$container_1\", interface=~\"eth0|eth2\"}[30s])) / 1024, \"legend\", \"Прием ($container_1)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -233,8 +323,8 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "label_replace(sum(rate(container_network_transmit_bytes_total{id=~\"$container\"}[1m])), \"legend\", \"Network Transmit 1\", \"\", \"(.*)\")",
+          "editorMode": "code",
+          "expr": "label_replace(sum(rate(container_network_transmit_bytes_total{name=~\"$container_1\", interface=~\"eth0|eth2\"}[30s])) / 1024, \"legend\", \"Передача ($container_1)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -251,7 +341,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "label_replace(\r\n  sum(\r\n    rate(container_network_receive_bytes_total{id=~\"$container_2\"}[1m])\r\n    +\r\n    rate(container_network_transmit_bytes_total{id=~\"$container_2\"}[1m])\r\n  ),\r\n  \"legend\", \"Network Total 2\", \"\", \"\"\r\n)",
+          "expr": "label_replace(\r\n  sum(\r\n    rate(container_network_receive_bytes_total{name=\"$container_2\", interface=~\"eth0|eth2\"}[30s])\r\n    +\r\n    rate(container_network_transmit_bytes_total{name=~\"$container_2\", interface=~\"eth0|eth2\"}[30s])\r\n  ) / 1024,\r\n  \"legend\", \"Сетевой траффик ($container_2)\", \"\", \"\"\r\n)",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -266,8 +356,8 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "label_replace(sum(rate(container_network_receive_bytes_total{id=~\"$container_2\"}[1m])), \"legend\", \"Network Receive 2\", \"\", \"(.*)\")",
+          "editorMode": "code",
+          "expr": "label_replace(sum(rate(container_network_receive_bytes_total{name=\"$container_2\", interface=~\"eth0|eth2\"}[30s])) /1024, \"legend\", \"Прием ($container_2)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -283,8 +373,8 @@
             "uid": "eeg7dg12gqtj4b"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "label_replace(sum(rate(container_network_transmit_bytes_total{id=~\"$container_2\"}[1m])), \"legend\", \"Network Transmit 2\", \"\", \"(.*)\")",
+          "editorMode": "code",
+          "expr": "label_replace(sum(rate(container_network_transmit_bytes_total{name=~\"$container_2\", interface=~\"eth0|eth2\"}[30s])) /1024, \"legend\", \"Передача ($container_2)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -357,22 +447,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "CPU 1"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU 2"
+              "options": "CPU (e2e-classic)"
             },
             "properties": [
               {
@@ -387,29 +462,7 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "CPU 1"
-            },
-            "properties": []
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "{Legend=\"CPU 2 (%)\"}"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "red",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU 2 (%)"
+              "options": "CPU (e2e-pwa)"
             },
             "properties": [
               {
@@ -456,7 +509,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "label_replace(sum(rate(container_cpu_usage_seconds_total{id=~\"$container\"}[1m])), \"legend\", \"CPU 1 (%)\", \"\", \"(.*)\")",
+          "expr": "label_replace(sum(rate(container_cpu_usage_seconds_total{name=~\"$container_1\"}[30s])), \"legend\", \"CPU ($container_1)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -473,7 +526,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "label_replace(sum(rate(container_cpu_usage_seconds_total{id=~\"$container_2\"}[1m])), \"legend\", \"CPU 2 (%)\", \"\", \"(.*)\")",
+          "expr": "label_replace(sum(rate(container_cpu_usage_seconds_total{name=~\"$container_2\"}[30s])), \"legend\", \"CPU ($container_2)\", \"\", \"(.*)\")",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -586,6 +639,36 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM (e2e-pwa)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "RAM (e2e-classic)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -617,7 +700,7 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "label_replace(sum(container_memory_usage_bytes{id=~\"$container\"}) / (1024 * 1024), \"legend\", \"RAM 1 (%)\", \"\", \"(.*)\")",
+          "expr": "label_replace(sum(container_memory_usage_bytes{name=~\"$container_1\"}) / (1024 * 1024), \"legend\", \"RAM ($container_1)\", \"\", \"(.*)\")",
           "legendFormat": "__auto",
           "range": true,
           "refId": "RAM 1 (Mb)"
@@ -629,7 +712,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "label_replace(sum(container_memory_usage_bytes{id=~\"$container_2\"}) / (1024 * 1024), \"legend\", \"RAM 2 (%)\", \"\", \"(.*)\")",
+          "expr": "label_replace(sum(container_memory_usage_bytes{name=~\"$container_2\"}) / (1024 * 1024), \"legend\", \"RAM ($container_2)\", \"\", \"(.*)\")",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -647,40 +730,44 @@
   "templating": {
     "list": [
       {
+        "allowCustomValue": false,
         "current": {
-          "text": "/docker/2b4d3daaa20347cf57259116bdea4900d76935dfd67ed8d83730782a3a659fb3",
-          "value": "/docker/2b4d3daaa20347cf57259116bdea4900d76935dfd67ed8d83730782a3a659fb3"
+          "text": "browser",
+          "value": "browser"
         },
-        "description": "Id исследуемого контейнера",
-        "label": "Container Id",
-        "name": "container",
-        "options": [
-          {
-            "selected": true,
-            "text": "/docker/2b4d3daaa20347cf57259116bdea4900d76935dfd67ed8d83730782a3a659fb3",
-            "value": "/docker/2b4d3daaa20347cf57259116bdea4900d76935dfd67ed8d83730782a3a659fb3"
-          }
-        ],
-        "query": "/docker/e90154f3b3e50a77a3c766f6db0ec7f88611b38bfe077a04581ee5aaa89027d5",
-        "type": "textbox"
+        "definition": "label_values(name)",
+        "description": "Название первого исследуемого контейнера",
+        "label": "Контейнер 1",
+        "name": "container_1",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       },
       {
+        "allowCustomValue": false,
         "current": {
-          "text": "/docker/ad0ec1504f331471c73bb8e004b11e560b0ed793e99076c2d2dbe65de37c4e53",
-          "value": "/docker/ad0ec1504f331471c73bb8e004b11e560b0ed793e99076c2d2dbe65de37c4e53"
+          "text": "browser",
+          "value": "browser"
         },
-        "description": "",
-        "label": "Second Comntainer ID",
+        "definition": "label_values(name)",
+        "description": "Название второго исследуемого контейнера",
+        "label": "Контейнер 2",
         "name": "container_2",
-        "options": [
-          {
-            "selected": true,
-            "text": "/docker/ad0ec1504f331471c73bb8e004b11e560b0ed793e99076c2d2dbe65de37c4e53",
-            "value": "/docker/ad0ec1504f331471c73bb8e004b11e560b0ed793e99076c2d2dbe65de37c4e53"
-          }
-        ],
-        "query": "/docker/2d98a2bbf2085d13fd85057fc09d66f16bb8e921789922406bde9580ad33a34c",
-        "type": "textbox"
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(name)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "type": "query"
       }
     ]
   },
@@ -692,6 +779,6 @@
   "timezone": "browser",
   "title": "Two containers comparison",
   "uid": "comparison9ng812jkgfi",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
