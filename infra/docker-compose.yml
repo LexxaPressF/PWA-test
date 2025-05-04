@@ -9,9 +9,10 @@ services:
     ports:
       - "443:443"
     networks:
+      - app-net
       - monitoring-net
 
-  classic:
+  classic-web:
     build:
       context: ../
       dockerfile: Dockerfile.web
@@ -19,6 +20,7 @@ services:
     ports:
       - "8080:80"
     networks:
+      - app-net
       - monitoring-net
 
   cadvisor:
@@ -57,11 +59,14 @@ services:
     container_name: browser
     restart: unless-stopped
     ports:
-      - "5800:5800"   # noVNC доступ для визуального управления браузером
+      - "5800:5800"
     environment:
-      - TZ=Europe/Moscow  # настройка часового пояса (при необходимости)
+      - TZ=Europe/Moscow
     networks:
-      - monitoring-net
+      - ext-net      # ← eth0: всё, что уходит в интернет
+      - novnc-net    # ← eth1: чисто VNC/novnc-стрим
+      - app-net      # ← eth2: только HTTP к вашим сервисам
+      - monitoring-net  # ← eth3: мониторинг
 
   e2e-pwa:
     image: cypress/included:12.3.0
@@ -73,23 +78,30 @@ services:
     working_dir: /e2e
     volumes:
       - ../:/e2e
-    command: ["cypress", "run", "--browser", "chrome"]# команда запуска тестов
+    command: ["cypress", "run", "--browser", "chrome"]
     networks:
-      - monitoring-net
+      - app-net
 
   e2e-classic:
     image: cypress/included:12.3.0
     container_name: e2e-classic
     depends_on:
-      - classic
+      - classic-web
     environment:
       - CYPRESS_BASE_URL=http://classic-web
     working_dir: /e2e
     volumes:
       - ../:/e2e
-    command: [ "cypress", "run", "--browser", "chrome" ]# команда запуска тестов
+    command: ["cypress", "run", "--browser", "chrome"]
     networks:
-      - monitoring-net
+      - app-net
 
 networks:
+  ext-net:
+    driver: bridge
+  novnc-net:
+    driver: bridge
+  app-net:
+    driver: bridge
   monitoring-net:
+    driver: bridge
